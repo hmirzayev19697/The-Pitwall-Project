@@ -1,0 +1,11 @@
+{
+  "endpoint": "team_radio",
+  "path": "/team_radio?driver_number=1&session_key=11234",
+  "url": "https://api.openf1.org/v1/team_radio?driver_number=1&session_key=11234",
+  "recorded_at": "2026-11-11T23:46:44.269799+00:00",
+  "status_code": 404,
+  "total_records": null,
+  "body": {
+    "detail": "No results found."
+  }
+}

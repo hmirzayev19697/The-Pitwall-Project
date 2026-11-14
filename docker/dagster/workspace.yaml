@@ -1,0 +1,4 @@
+load_from:
+  - python_module:
+      module_name: pitwall.orchestration.definitions
+      working_directory: /app

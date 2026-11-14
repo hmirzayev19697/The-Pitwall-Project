@@ -1,0 +1,210 @@
+{
+  "endpoint": "intervals",
+  "path": "/intervals?driver_number=1&session_key=11234",
+  "url": "https://api.openf1.org/v1/intervals?driver_number=1&session_key=11234",
+  "recorded_at": "2026-11-11T23:46:42.552069+00:00",
+  "status_code": 200,
+  "total_records": 1388,
+  "body": [
+    {
+      "date": "2026-03-08T04:03:34.713000+00:00",
+      "session_key": 11234,
+      "meeting_key": 1279,
+      "driver_number": 1,
+      "interval": null,
+      "gap_to_leader": 0.378
+    },
+    {
+      "date": "2026-03-08T04:03:36.746000+00:00",
+      "session_key": 11234,
+      "interval": 0.147,
+      "gap_to_leader": 0.491,
+      "driver_number": 1,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:03:43.722000+00:00",
+      "session_key": 11234,
+      "interval": 0.195,
+      "driver_number": 1,
+      "gap_to_leader": 1.458,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:03:46.867000+00:00",
+      "session_key": 11234,
+      "interval": 0.488,
+      "driver_number": 1,
+      "gap_to_leader": 1.277,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:03:50.723000+00:00",
+      "session_key": 11234,
+      "interval": 0.219,
+      "driver_number": 1,
+      "gap_to_leader": 1.201,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:03:55.037000+00:00",
+      "session_key": 11234,
+      "interval": 0.253,
+      "driver_number": 1,
+      "gap_to_leader": 1.871,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:00.702000+00:00",
+      "session_key": 11234,
+      "interval": 0.244,
+      "driver_number": 1,
+      "gap_to_leader": 2.528,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:03.823000+00:00",
+      "session_key": 11234,
+      "interval": 0.334,
+      "driver_number": 1,
+      "gap_to_leader": 2.849,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:05.718000+00:00",
+      "session_key": 11234,
+      "interval": 0.306,
+      "driver_number": 1,
+      "gap_to_leader": 2.878,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:10.121000+00:00",
+      "session_key": 11234,
+      "interval": 0.413,
+      "driver_number": 1,
+      "gap_to_leader": 3.254,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:13.773000+00:00",
+      "session_key": 11234,
+      "interval": 0.405,
+      "driver_number": 1,
+      "gap_to_leader": 3.268,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:17.100000+00:00",
+      "session_key": 11234,
+      "interval": 0.334,
+      "driver_number": 1,
+      "gap_to_leader": 3.14,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:20.900000+00:00",
+      "session_key": 11234,
+      "interval": 0.199,
+      "driver_number": 1,
+      "gap_to_leader": 2.794,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:23.987000+00:00",
+      "session_key": 11234,
+      "interval": 0.097,
+      "driver_number": 1,
+      "gap_to_leader": 2.429,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:29.535000+00:00",
+      "session_key": 11234,
+      "interval": 0.483,
+      "driver_number": 1,
+      "gap_to_leader": 2.946,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:34.838000+00:00",
+      "session_key": 11234,
+      "interval": 0.511,
+      "driver_number": 1,
+      "gap_to_leader": 2.917,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:39.009000+00:00",
+      "session_key": 11234,
+      "interval": 0.522,
+      "driver_number": 1,
+      "gap_to_leader": 3.067,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:45.156000+00:00",
+      "session_key": 11234,
+      "interval": 0.181,
+      "driver_number": 1,
+      "gap_to_leader": 3.442,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:49.042000+00:00",
+      "session_key": 11234,
+      "interval": 0.288,
+      "driver_number": 1,
+      "gap_to_leader": 3.959,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:53.291000+00:00",
+      "session_key": 11234,
+      "interval": 0.399,
+      "driver_number": 1,
+      "gap_to_leader": 4.543,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:55.459000+00:00",
+      "session_key": 11234,
+      "interval": 0.385,
+      "driver_number": 1,
+      "gap_to_leader": 4.661,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:04:57.545000+00:00",
+      "session_key": 11234,
+      "interval": 0.435,
+      "driver_number": 1,
+      "gap_to_leader": 4.784,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:05:02.439000+00:00",
+      "session_key": 11234,
+      "interval": 0.421,
+      "driver_number": 1,
+      "gap_to_leader": 4.597,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:05:03.136000+00:00",
+      "session_key": 11234,
+      "interval": 0.377,
+      "driver_number": 1,
+      "gap_to_leader": 4.529,
+      "meeting_key": 1279
+    },
+    {
+      "date": "2026-03-08T04:05:05.984000+00:00",
+      "session_key": 11234,
+      "interval": 0.432,
+      "driver_number": 1,
+      "gap_to_leader": 4.49,
+      "meeting_key": 1279
+    }
+  ]
+}

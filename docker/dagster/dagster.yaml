@@ -1,0 +1,14 @@
+# Dagster instance config for Docker Compose. Run, event and schedule storage is SQLite in
+# a volume shared by the webserver and the daemon; swap to Postgres when deploying.
+storage:
+  sqlite:
+    base_dir: /opt/dagster/home/storage
+
+run_coordinator:
+  module: dagster.core.run_coordinator
+  class: QueuedRunCoordinator
+  config:
+    max_concurrent_runs: 2   # keep load on the free APIs low
+
+telemetry:
+  enabled: false

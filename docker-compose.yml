@@ -1,0 +1,90 @@
+# Local PitWall stack: `make up`, then open Dagster at http://localhost:3000.
+# S3 API on http://localhost:9000, storage status on http://localhost:9333.
+# Credentials come from .env (see .env.example).
+name: pitwall
+
+x-app: &app
+  build:
+    context: .
+    dockerfile: docker/Dockerfile
+  image: pitwall:local
+  env_file: .env
+  environment:
+    PITWALL_DATA_DIR: /app/data
+    PITWALL_S3_ENDPOINT_URL: http://s3:9000
+    PITWALL_LOG_FORMAT: json
+  volumes:
+    - pitwall-data:/app/data
+    - dagster-home:/opt/dagster/home/storage
+  depends_on:
+    s3-init:
+      condition: service_completed_successfully
+
+services:
+  # S3-compatible object storage for the bronze layer. MinIO stopped publishing free Docker
+  # images in 2025, so the local stack uses SeaweedFS (Apache-2.0). The app only speaks the
+  # S3 API, so the cloud deployment points the same settings at Cloudflare R2 or AWS S3.
+  # See docs/adr/0002-seaweedfs-for-local-object-storage.md.
+  s3:
+    image: chrislusf/seaweedfs:4.53
+    environment:
+      S3_ACCESS_KEY: ${PITWALL_S3_ACCESS_KEY_ID:?set PITWALL_S3_ACCESS_KEY_ID in .env}
+      S3_SECRET_KEY: ${PITWALL_S3_SECRET_ACCESS_KEY:?set PITWALL_S3_SECRET_ACCESS_KEY in .env}
+    # Write the S3 identity file from .env, then hand over to the image's own entrypoint.
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        printf '{"identities":[{"name":"pitwall","credentials":[{"accessKey":"%s","secretKey":"%s"}],"actions":["Admin","Read","Write","List","Tagging"]}]}' "$$S3_ACCESS_KEY" "$$S3_SECRET_KEY" > /tmp/s3.json
+        exec /entrypoint.sh server -dir=/data -ip=s3 -ip.bind=0.0.0.0 -s3 -s3.port=9000 -s3.config=/tmp/s3.json
+    ports:
+      - "9000:9000"   # S3 API
+      - "9333:9333"   # cluster status
+    volumes:
+      - s3-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:9333/cluster/status"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  # One-shot job: create the bronze bucket if it does not exist, then exit.
+  s3-init:
+    image: chrislusf/seaweedfs:4.53
+    depends_on:
+      s3:
+        condition: service_healthy
+    environment:
+      BUCKET: ${PITWALL_S3_BUCKET:-pitwall-bronze}
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        for i in $$(seq 1 30); do
+          if echo "s3.bucket.list" | weed shell -master=s3:9333 2>/dev/null | grep -qw "$$BUCKET"; then
+            echo "bucket $$BUCKET ready"; exit 0
+          fi
+          echo "s3.bucket.create -name $$BUCKET" | weed shell -master=s3:9333 >/dev/null 2>&1
+          sleep 2
+        done
+        echo "could not create bucket $$BUCKET" >&2; exit 1
+
+  dagster-webserver:
+    <<: *app
+    command: ["dagster-webserver", "-h", "0.0.0.0", "-p", "3000", "-w", "/opt/dagster/home/workspace.yaml"]
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:3000/server_info')"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  dagster-daemon:
+    <<: *app
+    command: ["dagster-daemon", "run", "-w", "/opt/dagster/home/workspace.yaml"]
+
+volumes:
+  s3-data:
+  pitwall-data:
+  dagster-home:
